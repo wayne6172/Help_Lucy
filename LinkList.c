@@ -23,6 +23,10 @@ int main(){
         headPtr = newNode;
     }
 
+    Node *nowNode = headPtr;
     
-
+    while(nowNode != NULL){
+        printf("%d\n", nowNode->value);
+        nowNode = nowNode->next;
+    }
 }
