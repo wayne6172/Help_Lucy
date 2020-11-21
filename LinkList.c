@@ -25,8 +25,7 @@ int main(){
 
     Node *nowNode = headPtr;
     
-    while(nowNode != NULL){
+    for(nowNode = headPtr;nowNode != NULL;nowNode = nowNode->next;){
         printf("%d\n", nowNode->value);
-        nowNode = nowNode->next;
-    }
+    } 
 }
