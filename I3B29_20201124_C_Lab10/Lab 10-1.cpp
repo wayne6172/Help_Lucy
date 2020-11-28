@@ -48,13 +48,27 @@ void trace_data(node_point *ptr){
 }
 
 int main(void){
-	int i,temp[7];
+	int i, j,temp[7], t, deter;
 	node_point head = NULL;
 	node_point worknode = NULL;
 	srand(time(NULL));
 	
 	for(i=0;i<7;i++){
-		temp[i] =(rand()%50)+1;
+		t = (rand()%50)+1;
+
+		deter = 0;
+		for(j = 0; j < i; j++){
+			if(t == temp[j]){
+				deter = 1;
+				break;
+			}
+		}
+
+		if(deter == 0)
+			temp[i] = t;
+		else {
+			i--;
+		}
 	}
 	
 	printf("開獎球如下 <最後一球為特別號>: \n");
