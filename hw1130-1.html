@@ -63,13 +63,14 @@ function init() {
   });
 
 	var tree = new THREE.Mesh(new THREE.PlaneGeometry(40, 80), texMat);
+	tree.add(new THREE.AxesHelper(15));
 	trees = []
 	for (let i = 0; i < 15; i++) {
-  	let tt = tree.clone();
+		let tt = tree.clone();
 		tt.position.set ((-1+Math.random()*2)*100, 40, (-1+Math.random()*2)*100);
 		trees.push (tt);
-    scene.add (tt);
-  }
+		scene.add (tt);
+  	}
    
 } 
 
@@ -80,7 +81,11 @@ function animate() {
 	//controls.update();
 	//var planeNormal = new THREE.Vector3(0,0,0);
     // camera = new THREE.Vector3.ProjectOnPlane(camera, 0);
-	trees.forEach (function(t) {t.lookAt (camera.position)});
+	trees.forEach (function(t) {
+		t.lookAt (camera.position.clone().projectOnPlane(
+			new THREE.Vector3(0,1,0)).add(new THREE.Vector3(0,40,0)));
+		
+	});
 
 
 	renderer.render (scene, camera); 
