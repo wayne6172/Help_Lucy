@@ -66,6 +66,7 @@ TreeNode* getTestTree(int size){
 
     inorder(root);
     printf("\n");
+    return root;
 }
 
 void printList(Node* headPtr){

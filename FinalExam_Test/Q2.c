@@ -1,7 +1,29 @@
 #include "test.c"
 
 int isExist(TreeNode *root, int value){
-    return 1;
+	
+	if(root == NULL)
+		return 0;
+
+	
+	if(root->value > value){
+		if(root->left == NULL)
+			return 0;	
+		else if(root->left->value == value)
+			return 1;
+		else
+			return isExist(root->left,value);
+	}
+	else{
+		if(root->right == NULL)
+			return 0;	
+		else if(root->right->value == value)
+			return 1;
+		else
+			return isExist(root->right,value);
+	}
+	
+	//return 1;
 }
 
 int main(int argc, char const *argv[])

@@ -26,7 +26,7 @@ import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 
 var renderer, camera, scene;
-var count = 0,move = 0;
+var count = 0;
 var mesh, mesh2, mesh3, mesh4;
 
 
@@ -125,18 +125,21 @@ function onWindowResize() {
 }
 
 function textureAnimate() {
-  if (mesh) {
-    var texture = mesh.material.map;
-    texture.offset.x += 0.25;
-    if (texture.offset.x === Math.floor(texture.offset.x))
-      texture.offset.y += 0.5;
+ 
+   var uvs = mesh.geometry.faceVertexUvs[0];
+  // 1st & 2nd triangle
+  for (var j = 0; j < 2; j++) {
+    for (var i = 0; i < uvs[j].length; i++) {
+      uvs[j][i].x += 0.25;
+    }
   }
+  mesh.geometry.uvsNeedUpdate = true;
 }
 
 function animate() {
-  
+	
 	  count++;
-	  if (count % 3 === 0) {  // a crude way to set animation frequency
+	  if (count % 4 === 0) {  // a crude way to set animation frequency
 		textureAnimate();
 	  }
 
@@ -150,7 +153,7 @@ function animate() {
       
 
       if(mesh2.position.x > 0)
-        mesh.position.x = 0;//
+        mesh.position.x = 0;
       if(mesh4.position.x < 0)
         mesh3.position.x = 0;
     }
