@@ -5,7 +5,11 @@
 // Ex. 5 -> 3 -> 1 -> 0
 // Your answer, 0 -> 1 -> 3 -> 5
 void printReverseList(Node* root){
-    
+    if(root == NULL)
+        return;
+
+    printReverseList(root->next);
+    printf("%d -> ", root->value);
 }
 
 int main(int argc, char const *argv[])

@@ -15,7 +15,30 @@
 // 請注意順序，得依照輸入序列，並於複製出的每份檔案最尾端加上換行
 int main(int argc, char const *argv[])
 {
+    char temp[10000], tempLen = 0;
+    char inputFileName[100] = {0};
+    int value;
+
+    FILE *fp;
+
+    while(1){
+        scanf("%d", &value);
+        if(value == -1)
+            break;
+
+        sprintf(inputFileName, "Input/Test%d.txt", value);
+        fp = fopen(inputFileName, "r");
+
+        while(fscanf(fp, "%c", &temp[tempLen]) != EOF)
+            tempLen++;
+        temp[tempLen++] = '\n';
     
+        fclose(fp);
+    }
+    
+    fp = fopen("Output/output.txt", "w");
+
+    fprintf(fp, "%s", temp);
 
     return 0;
 }
